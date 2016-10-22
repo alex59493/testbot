@@ -1,0 +1,70 @@
+<html>
+
+  <head>
+    <title>Bot</title>
+    <style>
+      #wrap {
+        width: 400px;
+        height: 100%;
+        border: 1px solid red;
+        box-sizing: border-box;
+      }
+      #messages {
+        height: 90%;
+        border: 1px solid blue;
+        box-sizing: border-box;
+      }
+      #myMessage {
+        height: 10%;
+        border: 1px solid green;
+        box-sizing: border-box;
+      }
+      .message {
+        margin: 1%;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="wrap">
+
+      <div id="messages"></div>
+
+      <div id="myMessage">
+        <textarea id="messageTextarea" style="width: 100%; height: 100%;"></textarea>
+      </div>
+
+    </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+  <script>
+    $("#messageTextarea").keyup(function(e) {
+
+      if (e.which == 13 || e.keyCode == 13) {
+
+        // Append my message to messages
+        $('#messages').append("<div class='message'> Me : " + $(this).val() + "</div>");
+
+        // Append bot reply to messages
+        var parameters = { q: $(this).val() };
+        $.get( '/send', parameters, function(res) {
+          var res = JSON.parse(res);
+          for (i = 0; i < res.replies.length; i++) {
+            $('#messages').append("<div class='message' style='background-color: #F1F1F1;'> Bot : " + res.replies[i] + "</div>");
+          }
+        });
+
+        // Clear textarea
+        $("#messageTextarea").val('');
+        return false;
+      }
+      return true;
+    });
+  </script>
+
+  </body>
+
+</html>
