@@ -50,8 +50,9 @@
 
         // Append bot reply to messages
         var parameters = { q: $(this).val() };
-        $.get( '/send', parameters, function(res) {
+        $.get( '/get', parameters, function(res) {
           var res = JSON.parse(res);
+          console.log(res);
           for (i = 0; i < res.replies.length; i++) {
             $('#messages').append("<div class='message' style='background-color: #F1F1F1;'> Bot : " + res.replies[i] + "</div>");
           }

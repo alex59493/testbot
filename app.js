@@ -14,7 +14,7 @@ app.get('/', function(controReq, controRes) {
 });
 
 
-app.get('/send', function(controReq, controRes) {
+app.get('/get', function(controReq, controRes) {
 
   var q = controReq.query.q ? controReq.query.q : "";
 
@@ -35,7 +35,7 @@ app.get('/send', function(controReq, controRes) {
 
   }).catch(function(err) {
     console.log(err);
-    controRes.end(JSON.stringify({ "error": err }));
+    controRes.end("Error");
   })
 });
 
