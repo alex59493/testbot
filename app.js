@@ -25,11 +25,11 @@ app.get('/get', function(controReq, controRes) {
     myConversationToken = res.conversationToken;
 
     // get the action from the response
-//    var action = res.action;
-//    if (action && action.done) {
-//      // ...make a call to a weather API
-//      console.log("action " + action.slug + " is done.");
-//    }
+    var action = res.action;
+    if (action && action.done && action.slug === 'gender') {
+      // ...make a call to an API
+      console.log("SELECT meilleurs résultats FOR age = " + res.memory.age.value + "and gender = " + res.memory.gender.value)
+    }
 
     controRes.end(JSON.stringify(res));
 
