@@ -26,12 +26,16 @@ app.get('/get', function(controReq, controRes) {
 
     // get the action from the response
     var action = res.action;
-    if (action && action.done && action.slug === 'gender') {
+    if (action && action.done && action.slug === 'agree') {
       // ...make a call to an API
       console.log("SELECT meilleurs résultats FOR age = " + res.memory.age.value + "and gender = " + res.memory.gender.value)
+      controRes.write(JSON.stringify(["Here is what I propose :", "query result"]))
+    }
+    else {
+      controRes.write(JSON.stringify(res.replies))
     }
 
-    controRes.end(JSON.stringify(res));
+    controRes.end();
 
   }).catch(function(err) {
     console.log(err);
