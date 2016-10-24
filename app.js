@@ -10,6 +10,8 @@ var myConversationToken = null;
 
 
 app.get('/', function(controReq, controRes) {
+  myConversationToken = null;
+
   controRes.render('interface.ejs');
 });
 
@@ -24,16 +26,7 @@ app.get('/get', function(controReq, controRes) {
     // store the conversationToken
     myConversationToken = res.conversationToken;
 
-    // get the action from the response
-    var action = res.action;
-    if (action && action.done && action.slug === 'agree') {
-      // ...make a call to an API
-      console.log("SELECT meilleurs résultats FOR age = " + res.memory.age.value + "and gender = " + res.memory.gender.value)
-      controRes.write(JSON.stringify(["Here is what I propose :", "query result"]))
-    }
-    else {
-      controRes.write(JSON.stringify(res.replies))
-    }
+    controRes.write(JSON.stringify(res.replies))
 
     controRes.end();
 
